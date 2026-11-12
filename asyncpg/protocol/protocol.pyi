@@ -272,9 +272,14 @@ class SCRAMAuthentication:
     REQUIREMENTS_CLIENT_FINAL_MESSAGE: ClassVar[list[str]]
     REQUIREMENTS_CLIENT_PROOF: ClassVar[list[str]]
     SASLPREP_PROHIBITED: ClassVar[tuple[Callable[[str], bool], ...]]
+    def __init__(
+        self, authentication_method: bytes,
+        channel_binding_data: bytes | None = None,
+    ) -> None: ...
     authentication_method: bytes
     authorization_message: bytes | None
     client_channel_binding: bytes
+    channel_binding_data: bytes | None
     client_first_message_bare: bytes | None
     client_nonce: bytes | None
     client_proof: bytes | None

@@ -31,6 +31,7 @@ import inspect
 from . import compat
 from . import exceptions
 from . import protocol
+from ._channel_binding import ChannelBindingMode
 
 
 _SSL_REQUEST_CODE = 80877103
@@ -68,6 +69,7 @@ _ConnectionParameters = collections.namedtuple(
         'ssl',
         'sslmode',
         'ssl_negotiation',
+        'channel_binding',
         'server_settings',
         'target_session_attrs',
         'krbsrvname',
@@ -283,7 +285,8 @@ def _parse_connect_dsn_and_args(*, dsn, host, port, user,
                                 password, passfile, database, ssl,
                                 service, servicefile,
                                 direct_tls, server_settings,
-                                target_session_attrs, krbsrvname, gsslib):
+                                target_session_attrs, krbsrvname, gsslib,
+                                channel_binding):
     # `auth_hosts` is the version of host information for the purposes
     # of reading the pgpass file.
     auth_hosts = None
@@ -424,6 +427,11 @@ def _parse_connect_dsn_and_args(*, dsn, host, port, user,
                     'ssl_max_protocol_version'
                 )
 
+            if 'channel_binding' in query:
+                val = query.pop('channel_binding')
+                if channel_binding is None:
+                    channel_binding = val
+
             if 'target_session_attrs' in query:
                 dsn_target_session_attrs = query.pop(
                     'target_session_attrs'
@@ -540,6 +548,11 @@ def _parse_connect_dsn_and_args(*, dsn, host, port, user,
                     )
                     if ssl_max_protocol_version is None:
                         ssl_max_protocol_version = val
+
+                if 'channel_binding' in service_params:
+                    val = service_params.pop('channel_binding')
+                    if channel_binding is None:
+                        channel_binding = val
 
                 if 'target_session_attrs' in service_params:
                     dsn_target_session_attrs = service_params.pop(
@@ -660,6 +673,11 @@ def _parse_connect_dsn_and_args(*, dsn, host, port, user,
 
     if ssl is None and have_tcp_addrs:
         ssl = 'prefer'
+
+    if channel_binding is None:
+        channel_binding = os.getenv('PGCHANNELBINDING')
+
+    channel_binding_mode = ChannelBindingMode.parse(channel_binding)
 
     if direct_tls is not None:
         sslneg = (
@@ -831,6 +849,15 @@ def _parse_connect_dsn_and_args(*, dsn, host, port, user,
         raise exceptions.ClientConfigurationError(
             'direct TLS requires sslmode=require, verify-ca, or verify-full')
 
+    if (channel_binding_mode is ChannelBindingMode.require
+            and sslmode < SSLMode.require):
+        # A non-TLS connection can never carry channel binding data; fail
+        # at configuration time rather than silently authenticating without
+        # a bound channel.
+        raise exceptions.ClientConfigurationError(
+            'channel_binding=require requires sslmode=require, verify-ca, '
+            'or verify-full (or an explicit SSL context / ssl=True)')
+
     if server_settings is not None and (
             not isinstance(server_settings, dict) or
             not all(isinstance(k, str) for k in server_settings) or
@@ -869,6 +896,7 @@ def _parse_connect_dsn_and_args(*, dsn, host, port, user,
     params = _ConnectionParameters(
         user=user, password=password, database=database, ssl=ssl,
         sslmode=sslmode, ssl_negotiation=sslneg,
+        channel_binding=channel_binding_mode,
         server_settings=server_settings,
         target_session_attrs=target_session_attrs,
         krbsrvname=krbsrvname, gsslib=gsslib)
@@ -883,7 +911,7 @@ def _parse_connect_arguments(*, dsn, host, port, user, password, passfile,
                              max_cacheable_statement_size,
                              ssl, direct_tls, server_settings,
                              target_session_attrs, krbsrvname, gsslib,
-                             service, servicefile):
+                             service, servicefile, channel_binding):
     local_vars = locals()
     for var_name in {'max_cacheable_statement_size',
                      'max_cached_statement_lifetime',
@@ -914,7 +942,8 @@ def _parse_connect_arguments(*, dsn, host, port, user, password, passfile,
         server_settings=server_settings,
         target_session_attrs=target_session_attrs,
         krbsrvname=krbsrvname, gsslib=gsslib,
-        service=service, servicefile=servicefile)
+        service=service, servicefile=servicefile,
+        channel_binding=channel_binding)
 
     config = _ClientConfiguration(
         command_timeout=command_timeout,

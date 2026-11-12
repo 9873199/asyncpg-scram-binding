@@ -13,6 +13,9 @@ import secrets
 import stringprep
 import unicodedata
 
+from asyncpg import _channel_binding as apg_cb
+from asyncpg.exceptions._base import InterfaceError
+
 
 @cython.final
 cdef class SCRAMAuthentication:
@@ -27,7 +30,8 @@ cdef class SCRAMAuthentication:
     libpq references the following RFCs that it uses for implementation:
 
         * RFC 5802
-        * RFC 5803
+        * RFC 5801
+        * RFC 5929
         * RFC 7677
 
     The protocol works as such:
@@ -41,7 +45,7 @@ cdef class SCRAMAuthentication:
 
     - The client sends a "first message" to the server, where it chooses which
     method to authenticate with, and sends, along with the method, an indication
-    of channel binding (we disable for now), a nonce, and the username.
+    of channel binding, a nonce, and the username.
     (Technically, PostgreSQL ignores the username as it already has it from the
     initical connection, but we add it for completeness)
 
@@ -65,12 +69,15 @@ cdef class SCRAMAuthentication:
     the wire!)
 
     PostgreSQL 11 added support for the channel binding (i.e.
-    SCRAM-SHA-256-PLUS) but to do some ongoing discussion, there is a conscious
-    decision by several driver authors to not support it as of yet. As such, the
-    channel binding parameter is hard-coded to "n" for now, but can be updated
-    to support other channel binding methods in the future
+    SCRAM-SHA-256-PLUS). When the selected mechanism is PLUS, the GS2 header
+    advertises ``p=tls-server-end-point`` and the client final message's
+    ``c=`` attribute carries the RFC 5929 tls-server-end-point hash of the
+    peer certificate of the exact TLS channel the authentication runs on, so
+    the proof cannot be replayed or forwarded over another connection. With
+    plain SCRAM-SHA-256 the GS2 header is ``n,,``, which is the explicit
+    RFC 5801 signal that channel binding is not in use.
     """
-    AUTHENTICATION_METHODS = [b"SCRAM-SHA-256"]
+    AUTHENTICATION_METHODS = [b"SCRAM-SHA-256", b"SCRAM-SHA-256-PLUS"]
     DEFAULT_CLIENT_NONCE_BYTES = 24
     DIGEST = hashlib.sha256
     REQUIREMENTS_CLIENT_FINAL_MESSAGE = ['client_channel_binding',
@@ -90,11 +97,20 @@ cdef class SCRAMAuthentication:
         stringprep.in_table_c9,
     )
 
-    def __cinit__(self, bytes authentication_method):
+    def __cinit__(self, bytes authentication_method,
+                  object channel_binding_data=None):
+        if authentication_method not in self.AUTHENTICATION_METHODS:
+            raise InterfaceError(
+                'unsupported SCRAM authentication method: {!r}'.format(
+                    authentication_method))
         self.authentication_method = authentication_method
         self.authorization_message = None
-        # channel binding is turned off for the time being
-        self.client_channel_binding = b"n,,"
+        # Raw tls-server-end-point binding bytes for SCRAM-SHA-256-PLUS;
+        # None means plain SCRAM-SHA-256 and the GS2 "n,," downgrade header.
+        self.channel_binding_data = channel_binding_data
+        # The GS2 channel-binding header: "n,," or "p=tls-server-end-point,,"
+        self.client_channel_binding = apg_cb.build_channel_binding_header(
+            channel_binding_data)
         self.client_first_message_bare = None
         self.client_nonce = None
         self.client_proof = None
@@ -103,6 +119,17 @@ cdef class SCRAMAuthentication:
         self.server_first_message = None
         self.server_key = None
         self.server_nonce = None
+
+    cdef bytes _get_channel_binding_value(self):
+        """The bytes placed in c= and covered by the auth message.
+
+        For PLUS this is the GS2 header concatenated with the raw channel
+        binding bytes (RFC 5802 section 6 / RFC 5801 section 4); for plain
+        SCRAM it is just the "n,," header.
+        """
+        if self.channel_binding_data is None:
+            return self.client_channel_binding
+        return self.client_channel_binding + self.channel_binding_data
 
     cdef create_client_first_message(self, str username):
         """Create the initial client message for SCRAM authentication"""
@@ -128,6 +155,7 @@ cdef class SCRAMAuthentication:
         """Create the final client message as part of SCRAM authentication"""
         cdef:
             bytes msg
+            bytes channel_binding_value
 
         if any([getattr(self, val) is None for val in
                 self.REQUIREMENTS_CLIENT_FINAL_MESSAGE]):
@@ -139,8 +167,9 @@ cdef class SCRAMAuthentication:
 
         # generate the client proof
         self.client_proof = self._generate_client_proof(password=password)
+        channel_binding_value = self._get_channel_binding_value()
         msg = bytes()
-        msg += b"c=" + base64.b64encode(self.client_channel_binding) + \
+        msg += b"c=" + base64.b64encode(channel_binding_value) + \
             b",r=" + self.server_nonce + \
             b",p=" + base64.b64encode(self.client_proof)
         return msg
@@ -199,6 +228,7 @@ cdef class SCRAMAuthentication:
         """need to ensure a server response exists, i.e. """
         cdef:
             bytes salted_password
+            bytes channel_binding_value
 
         if any([getattr(self, val) is None for val in
                 self.REQUIREMENTS_CLIENT_PROOF]):
@@ -214,12 +244,13 @@ cdef class SCRAMAuthentication:
         # as well as compute the server key
         self.server_key = hmac.new(salted_password, b"Server Key", self.DIGEST)
         # build the authorization message that will be used in the
-        # client signature
-        # the "c=" portion is for the channel binding, but this is not
-        # presently implemented
+        # client signature. The "c=" portion carries the GS2 channel
+        # binding header and, for SCRAM-SHA-256-PLUS, the raw
+        # tls-server-end-point binding bytes of this TLS channel.
+        channel_binding_value = self._get_channel_binding_value()
         self.authorization_message = self.client_first_message_bare + b"," + \
             self.server_first_message + b",c=" + \
-            base64.b64encode(self.client_channel_binding) + \
+            base64.b64encode(channel_binding_value) + \
             b",r=" +  self.server_nonce
         # sign!
         client_signature = hmac.new(stored_key.digest(),

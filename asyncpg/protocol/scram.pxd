@@ -10,6 +10,9 @@ cdef class SCRAMAuthentication:
         readonly bytes authentication_method
         readonly bytes authorization_message
         readonly bytes client_channel_binding
+        # Raw channel binding bytes (tls-server-end-point hash) when the
+        # SCRAM-SHA-256-PLUS mechanism is in use; None for plain SCRAM.
+        readonly object channel_binding_data
         readonly bytes client_first_message_bare
         readonly bytes client_nonce
         readonly bytes client_proof
@@ -22,6 +25,7 @@ cdef class SCRAMAuthentication:
 
     cdef create_client_first_message(self, str username)
     cdef create_client_final_message(self, str password)
+    cdef bytes _get_channel_binding_value(self)
     cdef parse_server_first_message(self, bytes server_response)
     cdef verify_server_final_message(self, bytes server_final_message)
     cdef _bytes_xor(self, bytes a, bytes b)

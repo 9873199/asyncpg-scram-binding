@@ -7,6 +7,8 @@
 
 import hashlib
 
+from asyncpg import _channel_binding as apg_cb
+
 
 include "scram.pyx"
 
@@ -579,14 +581,22 @@ cdef class CoreProtocol:
 
         elif status == AUTH_REQUIRED_PASSWORD:
             # AuthenticationCleartextPassword
-            self.result_type = RESULT_OK
-            self.auth_msg = self._auth_password_message_cleartext()
+            if self._channel_binding_required():
+                self._fail_channel_binding_requirement(
+                    'cleartext password')
+            else:
+                self.result_type = RESULT_OK
+                self.auth_msg = self._auth_password_message_cleartext()
 
         elif status == AUTH_REQUIRED_PASSWORDMD5:
             # AuthenticationMD5Password
             # Note: MD5 salt is passed as a four-byte sequence
-            md5_salt = self.buffer.read_bytes(4)
-            self.auth_msg = self._auth_password_message_md5(md5_salt)
+            if self._channel_binding_required():
+                self._fail_channel_binding_requirement(
+                    'MD5 password')
+            else:
+                md5_salt = self.buffer.read_bytes(4)
+                self.auth_msg = self._auth_password_message_md5(md5_salt)
 
         elif status == AUTH_REQUIRED_SASL:
             # AuthenticationSASL
@@ -605,20 +615,33 @@ cdef class CoreProtocol:
                     unsupported_sasl_auth_methods.append(auth_method)
                 auth_method = self.buffer.read_null_str()
 
-            # if none of the advertised authentication methods are supported,
-            # raise an error
-            # otherwise, initialize the SASL authentication exchange
-            if not sasl_auth_methods:
-                unsupported_sasl_auth_methods = [m.decode("ascii")
-                    for m in unsupported_sasl_auth_methods]
+            # Negotiate the mechanism according to the channel_binding
+            # setting of this connection. require/prefer are enforced here,
+            # inside the authentication exchange, so a downgrade can never
+            # be decided by application code after the connection is up.
+            try:
+                selected_method, binding_data, _plus_selected = \
+                    self._select_sasl_mechanism(sasl_auth_methods)
+            except Exception as ex:
                 self.result_type = RESULT_FAILED
-                self.result = apg_exc.InterfaceError(
-                    'unsupported SASL Authentication methods requested by the '
-                    'server: {!r}'.format(
-                        ", ".join(unsupported_sasl_auth_methods)))
+                self.result = apg_exc.InterfaceError(str(ex))
+                self.result.__cause__ = ex
             else:
-                self.auth_msg = self._auth_password_message_sasl_initial(
-                    sasl_auth_methods)
+                if selected_method is None:
+                    # if none of the advertised authentication methods are
+                    # usable, raise an error listing everything the server
+                    # offered
+                    all_methods = unsupported_sasl_auth_methods + \
+                        sasl_auth_methods
+                    all_methods = [m.decode("ascii", "replace")
+                                   for m in all_methods]
+                    self.result_type = RESULT_FAILED
+                    self.result = apg_exc.InterfaceError(
+                        'unsupported SASL Authentication methods requested by '
+                        'the server: {!r}'.format(", ".join(all_methods)))
+                else:
+                    self.auth_msg = self._auth_password_message_sasl_initial(
+                        selected_method, binding_data)
 
         elif status == AUTH_SASL_CONTINUE:
             # AUTH_SASL_CONTINUE
@@ -696,12 +719,48 @@ cdef class CoreProtocol:
 
         return msg
 
-    cdef _auth_password_message_sasl_initial(self, list sasl_auth_methods):
+    cdef bint _channel_binding_required(self):
+        return self.con_params.channel_binding is \
+            apg_cb.ChannelBindingMode.require
+
+    cdef _fail_channel_binding_requirement(self, str server_method):
+        # channel_binding=require must never silently authenticate over a
+        # mechanism that does not bind the TLS channel.
+        self.result_type = RESULT_FAILED
+        self.result = apg_exc.InterfaceError(
+            'channel_binding=require requires SCRAM-SHA-256-PLUS, but the '
+            'server requested {} authentication'.format(server_method))
+
+    cdef _get_ssl_object(self):
+        """Return the SSLObject of this connection's transport, or None.
+
+        Channel binding data is only ever taken from the transport of the
+        connection performing the authentication, so a SCRAM proof cannot be
+        computed against one TLS channel and presented on another.
+        """
+        if self.transport is None:
+            return None
+        return self.transport.get_extra_info('ssl_object')
+
+    cdef _select_sasl_mechanism(self, list advertised_mechanisms):
+        cdef:
+            object mode
+            object ssl_object
+
+        mode = self.con_params.channel_binding
+        ssl_object = self._get_ssl_object()
+        return apg_cb.get_scram_mechanisms(
+            advertised_mechanisms, mode, ssl_object)
+
+    cdef _auth_password_message_sasl_initial(self, bytes mechanism,
+                                             object channel_binding_data):
         cdef:
             WriteBuffer msg
 
-        # use the first supported advertised mechanism
-        self.scram = SCRAMAuthentication(sasl_auth_methods[0])
+        # initialize the SASL authentication exchange with the mechanism
+        # selected by _select_sasl_mechanism() and the binding data of this
+        # exact TLS channel (None for plain SCRAM-SHA-256)
+        self.scram = SCRAMAuthentication(mechanism, channel_binding_data)
         # this involves a call and response with the server
         msg = WriteBuffer.new_message(b'p')
         msg.write_bytes(self.scram.create_client_first_message(self.user or ''))

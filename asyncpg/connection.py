@@ -2132,7 +2132,8 @@ async def connect(dsn=None, *,
                   server_settings=None,
                   target_session_attrs=None,
                   krbsrvname=None,
-                  gsslib=None):
+                  gsslib=None,
+                  channel_binding=None):
     r"""A coroutine to establish a connection to a PostgreSQL server.
 
     The connection parameters may be specified either as a connection
@@ -2151,8 +2152,9 @@ async def connect(dsn=None, *,
         The following options are recognized by asyncpg: ``host``,
         ``port``, ``user``, ``database`` (or ``dbname``), ``password``,
         ``passfile``, ``sslmode``, ``sslcert``, ``sslkey``, ``sslrootcert``,
-        and ``sslcrl``.  Unlike libpq, asyncpg will treat unrecognized
-        options as `server settings`_ to be used for the connection.
+        ``sslcrl``, and ``channel_binding``.  Unlike libpq, asyncpg will
+        treat unrecognized options as `server settings`_ to be used for the
+        connection.
 
         .. note::
 
@@ -2390,6 +2392,32 @@ async def connect(dsn=None, *,
         GSS library to use for GSSAPI/SSPI authentication. Can be 'gssapi'
         or 'sspi'. Defaults to 'sspi' on Windows and 'gssapi' otherwise.
 
+    :param str channel_binding:
+        Controls SCRAM channel binding (SCRAM-SHA-256-PLUS, RFC 5801 /
+        RFC 5929) and can be one of:
+
+        - ``'disable'`` (the default) - never use channel binding;
+          authentication uses plain SCRAM-SHA-256 exactly as before.
+        - ``'prefer'`` - use SCRAM-SHA-256-PLUS with the
+          ``tls-server-end-point`` binding of the negotiated TLS channel
+          when both the connection is TLS-protected and the server
+          advertises SCRAM-SHA-256-PLUS. Otherwise fall back to plain
+          SCRAM-SHA-256, signalling the downgrade through the GS2 ``n,,``
+          header as required by RFC 5801.
+        - ``'require'`` - require SCRAM-SHA-256-PLUS. A non-TLS connection,
+          a TLS channel whose server certificate cannot provide channel
+          binding data, or a server that does not advertise
+          SCRAM-SHA-256-PLUS causes the connection to fail; it never
+          silently falls back to plain SCRAM or password authentication.
+
+        The binding value is the RFC 5929 tls-server-end-point hash of the
+        peer certificate of the exact TLS connection carrying the
+        authentication, so a proof cannot be replayed over another
+        connection. Requires ``sslmode='require'``, ``'verify-ca'`` or
+        ``'verify-full'`` (or an explicit ``SSLContext`` / ``ssl=True``).
+        Can also be set through the ``channel_binding`` DSN option or the
+        ``PGCHANNELBINDING`` environment variable.
+
     :return: A :class:`~asyncpg.connection.Connection` instance.
 
     Example:
@@ -2472,6 +2500,10 @@ async def connect(dsn=None, *,
        SSL contexts created by asyncpg now set the ``postgresql`` ALPN
        protocol, which PostgreSQL 17+ requires for direct SSL connections.
 
+    .. versionchanged:: 0.33.0
+       Added the *channel_binding* parameter for SCRAM-SHA-256-PLUS
+       channel binding.
+
     .. _SSLContext: https://docs.python.org/3/library/ssl.html#ssl.SSLContext
     .. _create_default_context:
         https://docs.python.org/3/library/ssl.html#ssl.create_default_context
@@ -2518,6 +2550,7 @@ async def connect(dsn=None, *,
             target_session_attrs=target_session_attrs,
             krbsrvname=krbsrvname,
             gsslib=gsslib,
+            channel_binding=channel_binding,
         )
 
 

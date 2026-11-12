@@ -857,6 +857,85 @@ class TestConnectParams(tb.TestCase):
             ),
         },
 
+        {
+            'name': 'channel_binding_default',
+            'dsn': 'postgresql://user@host/db?sslmode=require',
+            'result': ([('host', 5432)], {
+                'user': 'user',
+                'database': 'db',
+                'ssl': True,
+                'sslmode': SSLMode.require,
+                'channel_binding': 'disable',
+                'target_session_attrs': 'any'})
+        },
+
+        {
+            'name': 'channel_binding_require_dsn',
+            'dsn': 'postgresql://user@host/db?sslmode=require'
+                   '&channel_binding=require',
+            'result': ([('host', 5432)], {
+                'user': 'user',
+                'database': 'db',
+                'ssl': True,
+                'sslmode': SSLMode.require,
+                'channel_binding': 'require',
+                'target_session_attrs': 'any'})
+        },
+
+        {
+            'name': 'channel_binding_prefer_kwarg',
+            'dsn': 'postgresql://user@host/db',
+            'ssl': 'require',
+            'channel_binding': 'prefer',
+            'result': ([('host', 5432)], {
+                'user': 'user',
+                'database': 'db',
+                'ssl': True,
+                'sslmode': SSLMode.require,
+                'channel_binding': 'prefer',
+                'target_session_attrs': 'any'})
+        },
+
+        {
+            'name': 'channel_binding_env',
+            'env': {
+                'PGUSER': 'user',
+                'PGDATABASE': 'testdb',
+                'PGPASSWORD': 'passw',
+                'PGHOST': 'host',
+                'PGPORT': '123',
+                'PGSSLMODE': 'require',
+                'PGCHANNELBINDING': 'prefer',
+            },
+            'result': ([('host', 123)], {
+                'user': 'user',
+                'password': 'passw',
+                'database': 'testdb',
+                'ssl': True,
+                'sslmode': SSLMode.require,
+                'channel_binding': 'prefer',
+                'target_session_attrs': 'any'})
+        },
+
+        {
+            'name': 'channel_binding_require_without_tls',
+            'dsn': 'postgresql://user@host/db?sslmode=disable'
+                   '&channel_binding=require',
+            'error': (
+                exceptions.ClientConfigurationError,
+                'channel_binding=require requires sslmode=require'
+            ),
+        },
+
+        {
+            'name': 'channel_binding_invalid',
+            'dsn': 'postgresql://user@host/db?channel_binding=yes-please',
+            'error': (
+                exceptions.ClientConfigurationError,
+                '`channel_binding` parameter must be one of'
+            ),
+        },
+
         # broken by https://github.com/python/cpython/pull/129418
         # {
         #     'name': 'dsn_ipv6_multi_host',
@@ -1144,6 +1223,7 @@ class TestConnectParams(tb.TestCase):
         test_env = {'PGHOST': None, 'PGPORT': None,
                     'PGUSER': None, 'PGPASSWORD': None,
                     'PGDATABASE': None, 'PGSSLMODE': None,
+                    'PGCHANNELBINDING': None,
                     'PGSERVICE': None, }
         test_env.update(env)
 
@@ -1160,6 +1240,7 @@ class TestConnectParams(tb.TestCase):
         target_session_attrs = testcase.get('target_session_attrs')
         krbsrvname = testcase.get('krbsrvname')
         gsslib = testcase.get('gsslib')
+        channel_binding = testcase.get('channel_binding')
         service = testcase.get('service')
         servicefile = testcase.get('servicefile')
 
@@ -1188,7 +1269,8 @@ class TestConnectParams(tb.TestCase):
                 server_settings=server_settings,
                 target_session_attrs=target_session_attrs,
                 krbsrvname=krbsrvname, gsslib=gsslib,
-                service=service, servicefile=servicefile)
+                service=service, servicefile=servicefile,
+                channel_binding=channel_binding)
 
             params = {
                 k: v for k, v in params._asdict().items()
@@ -1218,6 +1300,13 @@ class TestConnectParams(tb.TestCase):
                 # Avoid the hassle of specifying gsslib
                 # unless explicitly tested for
                 params.pop('gsslib', None)
+            if 'channel_binding' not in expected[1]:
+                # Avoid the hassle of specifying channel_binding
+                # unless explicitly tested for
+                params.pop('channel_binding', None)
+            else:
+                # Compare on the enum's string value.
+                params['channel_binding'] = params['channel_binding'].value
 
             self.assertEqual(expected, result, 'Testcase: {}'.format(testcase))
 
@@ -1290,6 +1379,15 @@ password=test_password
 target_session_attrs=primary
 krbsrvname=fakekrbsrvname
 gsslib=sspi
+
+[test_service_channel_binding]
+port=5433
+host=somehost
+dbname=test_dbname
+user=admin
+password=test_password
+sslmode=require
+channel_binding=require
         '''))
         connection_service_file.close()
         os.chmod(connection_service_file.name, stat.S_IWUSR | stat.S_IRUSR)
@@ -1366,6 +1464,25 @@ gsslib=sspi
                         'target_session_attrs': 'primary',
                         'krbsrvname': 'fakekrbsrvname',
                         'gsslib': 'sspi',
+                    }
+                )
+            })
+            # Test that channel_binding is read from the service file
+            self.run_testcase({
+                'dsn': 'postgresql://?service=test_service_channel_binding',
+                'env': {
+                    'PGSERVICEFILE': connection_service_file.name
+                },
+                'result': (
+                    [('somehost', 5433)],
+                    {
+                        'user': 'admin',
+                        'password': 'test_password',
+                        'database': 'test_dbname',
+                        'ssl': True,
+                        'sslmode': SSLMode.require,
+                        'channel_binding': 'require',
+                        'target_session_attrs': 'any',
                     }
                 )
             })

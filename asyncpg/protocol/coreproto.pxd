@@ -137,7 +137,12 @@ cdef class CoreProtocol:
 
     cdef _auth_password_message_cleartext(self)
     cdef _auth_password_message_md5(self, bytes salt)
-    cdef _auth_password_message_sasl_initial(self, list sasl_auth_methods)
+    cdef bint _channel_binding_required(self)
+    cdef _fail_channel_binding_requirement(self, str server_method)
+    cdef _get_ssl_object(self)
+    cdef _select_sasl_mechanism(self, list advertised_mechanisms)
+    cdef _auth_password_message_sasl_initial(self, bytes mechanism,
+                                             object channel_binding_data)
     cdef _auth_password_message_sasl_continue(self, bytes server_response)
     cdef _auth_gss_init_gssapi(self)
     cdef _auth_gss_init_sspi(self, bint negotiate)
