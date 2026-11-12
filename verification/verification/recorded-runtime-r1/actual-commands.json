@@ -1,0 +1,66 @@
+[
+  {
+    "id": "connection-example",
+    "argv": [
+      "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\env\\Scripts\\python.exe",
+      "-B",
+      "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\scram-demo.py"
+    ],
+    "exit_code": 0,
+    "finished_at_seconds": 2.34
+  },
+  {
+    "id": "protocol-checks",
+    "argv": [
+      "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\env\\Scripts\\python.exe",
+      "-B",
+      "-m",
+      "pytest",
+      "-v",
+      "--tb=short",
+      "-p",
+      "no:cacheprovider",
+      "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\test_scram_boundary.py",
+      "--basetemp",
+      "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\recording\\r1\\tmp-protocol"
+    ],
+    "exit_code": 1,
+    "finished_at_seconds": 23.5
+  },
+  {
+    "id": "require-checks",
+    "argv": [
+      "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\env\\Scripts\\python.exe",
+      "-B",
+      "-m",
+      "pytest",
+      "-v",
+      "--tb=short",
+      "-p",
+      "no:cacheprovider",
+      "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\test_scram_nonsasl.py",
+      "--basetemp",
+      "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\recording\\r1\\tmp-nonsasl"
+    ],
+    "exit_code": 1,
+    "finished_at_seconds": 45.65
+  },
+  {
+    "id": "compatibility-checks",
+    "argv": [
+      "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\env\\Scripts\\python.exe",
+      "-B",
+      "-m",
+      "pytest",
+      "-q",
+      "-p",
+      "no:cacheprovider",
+      "tests/test_scram.py",
+      "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\test_scram_pool.py",
+      "--basetemp",
+      "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\recording\\r1\\tmp-compatibility"
+    ],
+    "exit_code": 0,
+    "finished_at_seconds": 61.18
+  }
+]

@@ -1,0 +1,14 @@
+{
+  "rfc5802": "https://www.rfc-editor.org/rfc/rfc5802.txt",
+  "rfc5929": "https://www.rfc-editor.org/rfc/rfc5929.txt",
+  "files": [
+    {
+      "name": "rfc5802.txt",
+      "sha256": "12fcaba0dd78fe7aeb1c63f433314722977ef6746a638fce0f168c63a5bd24ba"
+    },
+    {
+      "name": "rfc5929.txt",
+      "sha256": "d32604f5d5e2028f09a8e0cf1584b7bb27e75b2e060233cd5387446ac486eab7"
+    }
+  ]
+}

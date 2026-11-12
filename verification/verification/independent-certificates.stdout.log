@@ -1,0 +1,36 @@
+......F                                                                  [100%]
+================================== FAILURES ===================================
+____________ test_unsupported_hashless_certificate_has_clear_error ____________
+
+    def test_unsupported_hashless_certificate_has_clear_error():
+        async def scenario():
+            async with CertificatePeer('ed25519').serve() as peer:
+                with pytest.raises((asyncpg.InterfaceError, asyncpg.PostgresError, ValueError)) as caught:
+                    await connect(peer)
+                assert any(word in str(caught.value).lower() for word in ('certif', 'hash', 'digest', 'algorithm', 'channel'))
+                assert all(not x['authenticated'] for x in peer.sessions)
+>       asyncio.run(scenario())
+
+..\test_scram_certificates.py:64: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Users\Administrator\AppData\Local\Programs\Python\Python314\Lib\asyncio\runners.py:204: in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+C:\Users\Administrator\AppData\Local\Programs\Python\Python314\Lib\asyncio\runners.py:127: in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\Administrator\AppData\Local\Programs\Python\Python314\Lib\asyncio\base_events.py:719: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    async def scenario():
+        async with CertificatePeer('ed25519').serve() as peer:
+>           with pytest.raises((asyncpg.InterfaceError, asyncpg.PostgresError, ValueError)) as caught:
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           Failed: DID NOT RAISE any of (InterfaceError, PostgresError, ValueError)
+
+..\test_scram_certificates.py:60: Failed
+=========================== short test summary info ===========================
+FAILED ..\test_scram_certificates.py::test_unsupported_hashless_certificate_has_clear_error
+1 failed, 6 passed in 5.16s

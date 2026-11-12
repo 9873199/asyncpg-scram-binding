@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="7" time="5.180" timestamp="2026-11-13T02:36:26.364971+08:00" hostname="DESKTOP-BPAMAV8"><testcase classname="evaluation.uf-20261113-recovery-scram-asyncpg-1.verification.test_scram_certificates" name="test_real_certificate_digest_and_deterministic_nonce[sha256]" time="0.592" /><testcase classname="evaluation.uf-20261113-recovery-scram-asyncpg-1.verification.test_scram_certificates" name="test_real_certificate_digest_and_deterministic_nonce[sha384]" time="0.725" /><testcase classname="evaluation.uf-20261113-recovery-scram-asyncpg-1.verification.test_scram_certificates" name="test_real_certificate_digest_and_deterministic_nonce[sha512]" time="0.839" /><testcase classname="evaluation.uf-20261113-recovery-scram-asyncpg-1.verification.test_scram_certificates" name="test_real_certificate_digest_and_deterministic_nonce[sha1]" time="0.327" /><testcase classname="evaluation.uf-20261113-recovery-scram-asyncpg-1.verification.test_scram_certificates" name="test_real_certificate_digest_and_deterministic_nonce[md5]" time="0.960" /><testcase classname="evaluation.uf-20261113-recovery-scram-asyncpg-1.verification.test_scram_certificates" name="test_changed_certificate_binding_does_not_authenticate" time="0.357" /><testcase classname="evaluation.uf-20261113-recovery-scram-asyncpg-1.verification.test_scram_certificates" name="test_unsupported_hashless_certificate_has_clear_error" time="0.086"><failure message="Failed: DID NOT RAISE any of (InterfaceError, PostgresError, ValueError)">def test_unsupported_hashless_certificate_has_clear_error():
+        async def scenario():
+            async with CertificatePeer('ed25519').serve() as peer:
+                with pytest.raises((asyncpg.InterfaceError, asyncpg.PostgresError, ValueError)) as caught:
+                    await connect(peer)
+                assert any(word in str(caught.value).lower() for word in ('certif', 'hash', 'digest', 'algorithm', 'channel'))
+                assert all(not x['authenticated'] for x in peer.sessions)
+&gt;       asyncio.run(scenario())
+
+..\test_scram_certificates.py:64: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Users\Administrator\AppData\Local\Programs\Python\Python314\Lib\asyncio\runners.py:204: in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+C:\Users\Administrator\AppData\Local\Programs\Python\Python314\Lib\asyncio\runners.py:127: in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\Administrator\AppData\Local\Programs\Python\Python314\Lib\asyncio\base_events.py:719: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    async def scenario():
+        async with CertificatePeer('ed25519').serve() as peer:
+&gt;           with pytest.raises((asyncpg.InterfaceError, asyncpg.PostgresError, ValueError)) as caught:
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           Failed: DID NOT RAISE any of (InterfaceError, PostgresError, ValueError)
+
+..\test_scram_certificates.py:60: Failed</failure></testcase></testsuite></testsuites>

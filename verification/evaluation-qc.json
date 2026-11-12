@@ -1,0 +1,13 @@
+{
+  "time": "2026-11-13T02:41:39+08:00",
+  "status": "PRIMARY_REVIEW_PASSED_AWAITING_USER_REVIEW",
+  "reviewer": "Codex primary agent, AI-assisted",
+  "score": 3,
+  "score_basis": "Core PLUS, proof/certificate binding and connection routes work from a clean rebuild; explicit fail-closed authentication and GS2 downgrade requirements have reproducible code gaps. Fits working core with visible bugs requiring code changes, not a wholesale unusable implementation or pass-rate calculation.",
+  "feedback_facts_locatable": true,
+  "native_process_and_product_reviewed": true,
+  "environment_failures_excluded": true,
+  "official_project_acceptance": "NOT_CLAIMED",
+  "recording_75s_reviewed": true,
+  "visible_extra_ssl_callback_trace": "Retained in recorded-runtime-r1/connection-example-output.log; reject outcome preserved, origin not separately scored."
+}

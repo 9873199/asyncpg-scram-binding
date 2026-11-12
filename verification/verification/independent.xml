@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="2" skipped="0" tests="16" time="5.605" timestamp="2026-11-13T02:36:11.942379+08:00" hostname="DESKTOP-BPAMAV8"><testcase classname="evaluation.uf-20261113-recovery-scram-asyncpg-1.verification.test_scram_boundary" name="test_negotiation_and_exact_proof[disable-True-mechanisms0-SCRAM-SHA-256-n,,]" time="0.368" /><testcase classname="evaluation.uf-20261113-recovery-scram-asyncpg-1.verification.test_scram_boundary" name="test_negotiation_and_exact_proof[prefer-True-mechanisms1-SCRAM-SHA-256-PLUS-p=tls-server-end-point,,]" time="0.261" /><testcase classname="evaluation.uf-20261113-recovery-scram-asyncpg-1.verification.test_scram_boundary" name="test_negotiation_and_exact_proof[require-True-mechanisms2-SCRAM-SHA-256-PLUS-p=tls-server-end-point,,]" time="0.232" /><testcase classname="evaluation.uf-20261113-recovery-scram-asyncpg-1.verification.test_scram_boundary" name="test_negotiation_and_exact_proof[prefer-True-mechanisms3-SCRAM-SHA-256-y,,]" time="0.248"><failure message="AssertionError: assert (b'SCRAM-SHA-256' == b'SCRAM-SHA-256'&#10;  &#10;  Use -v to get more diff and False)&#10; +  where False = &lt;built-in method startswith of str object at 0x0000021BA3292730&gt;('y,,')&#10; +    where &lt;built-in method startswith of str object at 0x0000021BA3292730&gt; = 'n,,n=local-test-user,r=v2fHUTCUHcVV8NCvREbv1lfJ0ekbjfFX'.startswith">mode = 'prefer', tls = True, mechanisms = (b'SCRAM-SHA-256',)
+expected = b'SCRAM-SHA-256', gs2 = 'y,,'
+
+    @pytest.mark.parametrize('mode,tls,mechanisms,expected,gs2',[
+     ('disable',True,(b'SCRAM-SHA-256-PLUS',b'SCRAM-SHA-256'),b'SCRAM-SHA-256','n,,'),
+     ('prefer',True,(b'SCRAM-SHA-256-PLUS',b'SCRAM-SHA-256'),b'SCRAM-SHA-256-PLUS','p=tls-server-end-point,,'),
+     ('require',True,(b'SCRAM-SHA-256-PLUS',),b'SCRAM-SHA-256-PLUS','p=tls-server-end-point,,'),
+     ('prefer',True,(b'SCRAM-SHA-256',),b'SCRAM-SHA-256','y,,'),
+     ('prefer',False,(b'SCRAM-SHA-256',),b'SCRAM-SHA-256','n,,'),
+     ('disable',False,(b'SCRAM-SHA-256',),b'SCRAM-SHA-256','n,,')])
+    def test_negotiation_and_exact_proof(mode,tls,mechanisms,expected,gs2):
+     async def scenario():
+      async with Peer(tls=tls,mechanisms=mechanisms).serve() as p:
+       await connect(p,mode);await asyncio.sleep(.03)
+       assert not p.errors and p.sessions[0]['authenticated']
+       assert p.sessions[0]['mechanism']==expected and p.sessions[0]['first'].startswith(gs2)
+&gt;    asyncio.run(scenario())
+
+..\test_scram_boundary.py:33: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Users\Administrator\AppData\Local\Programs\Python\Python314\Lib\asyncio\runners.py:204: in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+C:\Users\Administrator\AppData\Local\Programs\Python\Python314\Lib\asyncio\runners.py:127: in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\Administrator\AppData\Local\Programs\Python\Python314\Lib\asyncio\base_events.py:719: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    async def scenario():
+     async with Peer(tls=tls,mechanisms=mechanisms).serve() as p:
+      await connect(p,mode);await asyncio.sleep(.03)
+      assert not p.errors and p.sessions[0]['authenticated']
+&gt;     assert p.sessions[0]['mechanism']==expected and p.sessions[0]['first'].startswith(gs2)
+E     AssertionError: assert (b'SCRAM-SHA-256' == b'SCRAM-SHA-256'
+E       
+E       Use -v to get more diff and False)
+E      +  where False = &lt;built-in method startswith of str object at 0x0000021BA3292730&gt;('y,,')
+E      +    where &lt;built-in method startswith of str object at 0x0000021BA3292730&gt; = 'n,,n=local-test-user,r=v2fHUTCUHcVV8NCvREbv1lfJ0ekbjfFX'.startswith
+
+..\test_scram_boundary.py:32: AssertionError</failure></testcase><testcase classname="evaluation.uf-20261113-recovery-scram-asyncpg-1.verification.test_scram_boundary" name="test_negotiation_and_exact_proof[prefer-False-mechanisms4-SCRAM-SHA-256-n,,]" time="0.208" /><testcase classname="evaluation.uf-20261113-recovery-scram-asyncpg-1.verification.test_scram_boundary" name="test_negotiation_and_exact_proof[disable-False-mechanisms5-SCRAM-SHA-256-n,,]" time="0.222" /><testcase classname="evaluation.uf-20261113-recovery-scram-asyncpg-1.verification.test_scram_boundary" name="test_require_rejects_downgrade[False-mechanisms0]" time="0.160" /><testcase classname="evaluation.uf-20261113-recovery-scram-asyncpg-1.verification.test_scram_boundary" name="test_require_rejects_downgrade[True-mechanisms1]" time="0.163" /><testcase classname="evaluation.uf-20261113-recovery-scram-asyncpg-1.verification.test_scram_boundary" name="test_invalid_server_signature_rejected" time="0.429" /><testcase classname="evaluation.uf-20261113-recovery-scram-asyncpg-1.verification.test_scram_boundary" name="test_omitted_server_signature_cannot_complete_authentication" time="0.201"><failure message="Failed: DID NOT RAISE any of (InterfaceError, PostgresError, TimeoutError)">def test_omitted_server_signature_cannot_complete_authentication():
+     async def scenario():
+      async with Peer(omit_server_signature=True).serve() as p:
+       with pytest.raises((asyncpg.InterfaceError,asyncpg.PostgresError,TimeoutError)):await connect(p,'require')
+&gt;    asyncio.run(scenario())
+
+..\test_scram_boundary.py:55: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Users\Administrator\AppData\Local\Programs\Python\Python314\Lib\asyncio\runners.py:204: in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+C:\Users\Administrator\AppData\Local\Programs\Python\Python314\Lib\asyncio\runners.py:127: in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\Administrator\AppData\Local\Programs\Python\Python314\Lib\asyncio\base_events.py:719: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    async def scenario():
+     async with Peer(omit_server_signature=True).serve() as p:
+&gt;     with pytest.raises((asyncpg.InterfaceError,asyncpg.PostgresError,TimeoutError)):await connect(p,'require')
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E     Failed: DID NOT RAISE any of (InterfaceError, PostgresError, TimeoutError)
+
+..\test_scram_boundary.py:54: Failed</failure></testcase><testcase classname="evaluation.uf-20261113-recovery-scram-asyncpg-1.verification.test_scram_boundary" name="test_missing_binding_data_requires_refusal_and_no_cross_call_cache" time="0.275" /><testcase classname="evaluation.uf-20261113-recovery-scram-asyncpg-1.verification.test_scram_boundary" name="test_independent_certificates_concurrent_connections" time="0.448" /><testcase classname="evaluation.uf-20261113-recovery-scram-asyncpg-1.verification.test_scram_boundary" name="test_connection_routes_preserve_requirement[True-False]" time="0.249" /><testcase classname="evaluation.uf-20261113-recovery-scram-asyncpg-1.verification.test_scram_boundary" name="test_connection_routes_preserve_requirement[False-True]" time="0.246" /><testcase classname="evaluation.uf-20261113-recovery-scram-asyncpg-1.verification.test_scram_boundary" name="test_connection_routes_preserve_requirement[True-True]" time="0.244" /><testcase classname="evaluation.uf-20261113-recovery-scram-asyncpg-1.verification.test_scram_boundary" name="test_invalid_mode_rejected_before_network" time="0.005" /></testsuite></testsuites>

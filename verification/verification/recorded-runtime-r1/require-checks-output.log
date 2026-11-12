@@ -1,0 +1,32 @@
+============================= test session starts =============================
+platform win32 -- Python 3.14.3, pytest-9.2.0, pluggy-1.7.0 -- D:\hc\userFeedback\cache\execution-security-new11-20261112\evaluation\uf-20261113-recovery-scram-asyncpg-1\verification\env\Scripts\python.exe
+rootdir: D:\hc\userFeedback\cache\execution-security-new11-20261112
+collecting ... collected 6 items
+
+..\test_scram_nonsasl.py::test_require_refuses_non_channel_bound_auth_before_password[0-False] PASSED [ 16%]
+..\test_scram_nonsasl.py::test_require_refuses_non_channel_bound_auth_before_password[0-True] FAILED [ 33%]
+..\test_scram_nonsasl.py::test_require_refuses_non_channel_bound_auth_before_password[3-False] PASSED [ 50%]
+..\test_scram_nonsasl.py::test_require_refuses_non_channel_bound_auth_before_password[3-True] PASSED [ 66%]
+..\test_scram_nonsasl.py::test_require_refuses_non_channel_bound_auth_before_password[5-False] PASSED [ 83%]
+..\test_scram_nonsasl.py::test_require_refuses_non_channel_bound_auth_before_password[5-True] PASSED [100%]
+
+================================== FAILURES ===================================
+_____ test_require_refuses_non_channel_bound_auth_before_password[0-True] _____
+..\test_scram_nonsasl.py:28: in test_require_refuses_non_channel_bound_auth_before_password
+    asyncio.run(scenario())
+C:\Users\Administrator\AppData\Local\Programs\Python\Python314\Lib\asyncio\runners.py:204: in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+C:\Users\Administrator\AppData\Local\Programs\Python\Python314\Lib\asyncio\runners.py:127: in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\Administrator\AppData\Local\Programs\Python\Python314\Lib\asyncio\base_events.py:719: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+..\test_scram_nonsasl.py:21: in scenario
+    with pytest.raises((asyncpg.InterfaceError, asyncpg.PostgresError, ValueError)):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE any of (InterfaceError, PostgresError, ValueError)
+=========================== short test summary info ===========================
+FAILED ..\test_scram_nonsasl.py::test_require_refuses_non_channel_bound_auth_before_password[0-True]
+========================= 1 failed, 5 passed in 1.75s =========================

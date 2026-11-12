@@ -1,0 +1,14 @@
+{
+  "time": "2026-11-13T02:34:22+08:00",
+  "argv": [
+    "D:\\hc\\userFeedback\\cache\\.venv\\Scripts\\python.exe",
+    "-B",
+    "-m",
+    "venv",
+    "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\env"
+  ],
+  "cwd": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\replay-source",
+  "exit_code": 0,
+  "stdout_log": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\venv.stdout.log",
+  "stderr_log": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\venv.stderr.log"
+}

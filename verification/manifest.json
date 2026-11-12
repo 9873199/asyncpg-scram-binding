@@ -1,0 +1,378 @@
+{
+  "created": "2026-11-13T02:44:07+08:00",
+  "reviewed": true,
+  "reviewer": "Codex primary agent, AI-assisted",
+  "uid": 126,
+  "frozen_commit": "b28954e9c50f81e98ecbaf1bfea46d1a08a8a542",
+  "native_trajectory_sha256": "91fbd5f31128308a4c91dd3042520334ed3ae069c47fa4ed11ea7f7f7fa3174d",
+  "files": [
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\freeze.json",
+      "path": "freeze.json",
+      "sha256": "050b7c2dc16e7567b62572f005060d55c78dd768d817f1699dfa00e7f3b35f2c"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\freeze-audit.json",
+      "path": "freeze-audit.json",
+      "sha256": "9e9ae83a2423de5fe70b813e607a612fe2c1b41cb3dabb8a304031780365f794"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\environment-reviewed.json",
+      "path": "environment-reviewed.json",
+      "sha256": "5c884a26e704084e103f6f55454ba279be808d5659a60c7e3cde392fce92f408"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\evidence-map.json",
+      "path": "evidence-map.json",
+      "sha256": "3f17c9266bf4a24ccdf7da42cafa0b7c86c3dde2e82cc076ce90ed8abbc383de"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\model-final-answer.txt",
+      "path": "model-final-answer.txt",
+      "sha256": "ccfce466b74b3e0efc4a76763843dab470f8c99ba53b557df372b775767f06e6"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\test-results.json",
+      "path": "test-results.json",
+      "sha256": "2223fe186a7bfddef1e3f8315a7da91901092cc7d5e7c106efc9d4ce87dbdde4"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\evaluation-qc.json",
+      "path": "evaluation-qc.json",
+      "sha256": "6888c56b4b7717a71efcda14f8d97e418871dd470aacb52f05131910b0e7fdd2"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\actual-import.json",
+      "path": "verification/actual-import.json",
+      "sha256": "2ca6e3906c55957406f975e5aed63f2962edbcc58ee2d52e13a158d6dbb148ae"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\actual-import.stderr.log",
+      "path": "verification/actual-import.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\actual-import.stdout.log",
+      "path": "verification/actual-import.stdout.log",
+      "sha256": "6c9f829986c9c26066b6c4c92e0edb51f1453349cd635bb231b34f786b5eb9f5"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\build-environment-preparation.json",
+      "path": "verification/build-environment-preparation.json",
+      "sha256": "010687d0995aa012149ba231c0904f44e8a9f6921c2d2c79a1a3bfbaa95603c9"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\build-frozen.json",
+      "path": "verification/build-frozen.json",
+      "sha256": "e5248352c201acb204406944c2d6b7157348a60df130f543cb3a3d9204c441d9"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\build-frozen.stderr.log",
+      "path": "verification/build-frozen.stderr.log",
+      "sha256": "e49af0b5e5c00645a465cd6afac9887ab9dbb498db8a09ab76f0ce20fac8be8f"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\build-frozen.stdout.log",
+      "path": "verification/build-frozen.stdout.log",
+      "sha256": "dc196ef89f90d4060949bbc35f10ef25f885919c48c556d0983b2e85dcbd742e"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\certificate-peer.py",
+      "path": "verification/certificate-peer.py",
+      "sha256": "ad5aabd65269e39b7850c64ac749d57b65c9edae7632d6f6879eeed6594071f2"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\certificates.xml",
+      "path": "verification/certificates.xml",
+      "sha256": "d5120e3c635f2aff05e942f669a215a2b445cea39ff2eba161be988555e9426d"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\connect-params.xml",
+      "path": "verification/connect-params.xml",
+      "sha256": "f884653892a9271fb1452f0c4538f99808ff9d8b4c43f630afe577716fc9a01a"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\dependencies.json",
+      "path": "verification/dependencies.json",
+      "sha256": "a2c12a26dacb5bbc52eca2a779698a5787d0c920cecd2d0ee63433b4aa99327a"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\dependencies.stderr.log",
+      "path": "verification/dependencies.stderr.log",
+      "sha256": "e49af0b5e5c00645a465cd6afac9887ab9dbb498db8a09ab76f0ce20fac8be8f"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\dependencies.stdout.log",
+      "path": "verification/dependencies.stdout.log",
+      "sha256": "d1cf37c1532d40a6c89815a5dd97fb374b23fd71bd1e68a53647a5880130e4cf"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\dependency-lock.json",
+      "path": "verification/dependency-lock.json",
+      "sha256": "05503b491a2151c38071056847752a518e77572c5bd3a47933935f68718d2a8a"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\dependency-lock.stderr.log",
+      "path": "verification/dependency-lock.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\dependency-lock.stdout.log",
+      "path": "verification/dependency-lock.stdout.log",
+      "sha256": "1d4de3f24bbb0fa78130e2ac5d20545872558249b4c32f222d4401662fbf43d8"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\frozen-model-channel-tests.json",
+      "path": "verification/frozen-model-channel-tests.json",
+      "sha256": "241c66871be75e2df7dd971d4f4683065eb3661f45f6b63f0989e97cd3bbaa45"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\frozen-model-channel-tests.stderr.log",
+      "path": "verification/frozen-model-channel-tests.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\frozen-model-channel-tests.stdout.log",
+      "path": "verification/frozen-model-channel-tests.stdout.log",
+      "sha256": "1da6cdae5099c6ee4ae362236d78148aab777c71d221441c111b5d75760c80f9"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\independent-certificates.json",
+      "path": "verification/independent-certificates.json",
+      "sha256": "6ca13df9aa2444a868275bc5a12a67af090b0e2f1818478b01525f1f435b571a"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\independent-certificates.stderr.log",
+      "path": "verification/independent-certificates.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\independent-certificates.stdout.log",
+      "path": "verification/independent-certificates.stdout.log",
+      "sha256": "b25ab55e0b348d3b937eb58bad0e196a609cacd8e34504b5a220d4463ce68a9a"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\independent-nonsasl.json",
+      "path": "verification/independent-nonsasl.json",
+      "sha256": "edabf9bdbfc3f0fa9276cd2486d9e2b105a8cbc66c737ee4680ab92627a24465"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\independent-nonsasl.stderr.log",
+      "path": "verification/independent-nonsasl.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\independent-nonsasl.stdout.log",
+      "path": "verification/independent-nonsasl.stdout.log",
+      "sha256": "1fad3de31d46a6def5cbc6e5f8d0465ff16c9b922b9748f5b0599d146c6a4b6a"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\independent-pool.json",
+      "path": "verification/independent-pool.json",
+      "sha256": "38c3fa91c5b58b3e915900c91cf9c0f266aaf491457db4fe27d8275ea3f20b19"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\independent-pool.stderr.log",
+      "path": "verification/independent-pool.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\independent-pool.stdout.log",
+      "path": "verification/independent-pool.stdout.log",
+      "sha256": "3ef750c7190b09c7cb7e5f2a29de6538db8c010f2f7f3c1519ec915e04dce94d"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\independent-protocol.json",
+      "path": "verification/independent-protocol.json",
+      "sha256": "a77653da6ef018d033e018b7ed49581d94ec84963ade8ffc8acd91d1189384d3"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\independent-protocol.stderr.log",
+      "path": "verification/independent-protocol.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\independent-protocol.stdout.log",
+      "path": "verification/independent-protocol.stdout.log",
+      "sha256": "4ce283ca1c70a09796f75903270f4651f3e51225a835407807597243f3ecd3bb"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\independent.xml",
+      "path": "verification/independent.xml",
+      "sha256": "57742b30255c77a66510d5aac0773ddc1a0410d1b49f6f7a38bb7ebc8adcdd0b"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\model-channel.xml",
+      "path": "verification/model-channel.xml",
+      "sha256": "396b620b412be5e456978785e1093453f7f9fc86df7915f98e69ba1ce2210215"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\model-dependencies-after-freeze.json",
+      "path": "verification/model-dependencies-after-freeze.json",
+      "sha256": "ae9cb4098d6692c9a78cc43b83639112608b3dc7f371b496e53c15e2e17df16a"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\model-dependencies-after-freeze.stderr.log",
+      "path": "verification/model-dependencies-after-freeze.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\model-dependencies-after-freeze.stdout.log",
+      "path": "verification/model-dependencies-after-freeze.stdout.log",
+      "sha256": "d4b8b9e239d5300e573598c7921d2a1f0fd6be154a3d4e663f5268a2581446ee"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\nonsasl.xml",
+      "path": "verification/nonsasl.xml",
+      "sha256": "5d59d9e047cd1321ba98cdf496d3f7b490f5dfdd61b6d6e283188c51960eabb4"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\pg-nonsasl-peer.py",
+      "path": "verification/pg-nonsasl-peer.py",
+      "sha256": "ef9505a4e20ac5718274318e072712cda9840e04814392920735134f5a631abb"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\pg-wire-peer.py",
+      "path": "verification/pg-wire-peer.py",
+      "sha256": "348392683718c795889cff09fc51927eb5ac2a8a18391bc5df8f981147292599"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\pool.xml",
+      "path": "verification/pool.xml",
+      "sha256": "772af4d4145de974f096a29ccf13782ce6b58dd35f66617d1ccf43361f316cf8"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\reproduction-notes.md",
+      "path": "verification/reproduction-notes.md",
+      "sha256": "021c6a791fa5db71f34504876e11125a4f8a9feb10e75af9da05d9a1f880cda2"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\scram-demo.py",
+      "path": "verification/scram-demo.py",
+      "sha256": "fccd906d6830f6b02c4606e0a7b6c54713741ca76960abb22274d96f2031ef07"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\submodule-replay-proof.json",
+      "path": "verification/submodule-replay-proof.json",
+      "sha256": "4e7844d540bcacc8e2976551573d279876ce11e73b5f20569dcff4ccc67a383c"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\test_scram_boundary.py",
+      "path": "verification/test_scram_boundary.py",
+      "sha256": "3aff0b168ac14f4d38bec78b6c99d279a01acaf757e58a3be9ddd9f5c68ef707"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\test_scram_certificates.py",
+      "path": "verification/test_scram_certificates.py",
+      "sha256": "14698b374446c84d378aa17266aca8648ce621fa0b6e78c5ce920a3effcc6fbd"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\test_scram_nonsasl.py",
+      "path": "verification/test_scram_nonsasl.py",
+      "sha256": "e305b3b3fbab52b26606cf8a94ca4968ee29c3ca2d6bf55e49e4af1a21d9b9f4"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\test_scram_pool.py",
+      "path": "verification/test_scram_pool.py",
+      "sha256": "1d382a496299a2e45f90903b1f8b60d1e0961aeed8e9224833747f0a8bfddf4d"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\upstream-connect-params.json",
+      "path": "verification/upstream-connect-params.json",
+      "sha256": "892baaa70b298d5f4539ebb2e5c99a79bc2751c28f10803a214103eb66063297"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\upstream-connect-params.stderr.log",
+      "path": "verification/upstream-connect-params.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\upstream-connect-params.stdout.log",
+      "path": "verification/upstream-connect-params.stdout.log",
+      "sha256": "7133e5e5321f3a96094a78056dcac5488cafe32448a6b109c2546cc947ae7777"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\upstream-scram.json",
+      "path": "verification/upstream-scram.json",
+      "sha256": "f1c5220d5750ef90ad04c897cb9e66184aeecb98706a702d5a04fe6614933b31"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\upstream-scram.stderr.log",
+      "path": "verification/upstream-scram.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\upstream-scram.stdout.log",
+      "path": "verification/upstream-scram.stdout.log",
+      "sha256": "2869332b0a5b3cb38a6b595d6b1476430c6a3cfdb314d96f2648a4c6e2a96c95"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\upstream.xml",
+      "path": "verification/upstream.xml",
+      "sha256": "2041c233b1fc3097c8bd304045e12d01394196cad35c625f3cd0a27f3f7dc2e9"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\venv.json",
+      "path": "verification/venv.json",
+      "sha256": "4f2ee3535032bd978de81ee97319748a526a77706130584aae9ab150630470e3"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\venv.stderr.log",
+      "path": "verification/venv.stderr.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\venv.stdout.log",
+      "path": "verification/venv.stdout.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\recorded-runtime-r1\\actual-commands.json",
+      "path": "verification/recorded-runtime-r1/actual-commands.json",
+      "sha256": "a3fe2f5ad54fcec0127e1104fa35fa481c4b70e3e3f769af3ad42c7e950816fd"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\recorded-runtime-r1\\compatibility-checks-output.log",
+      "path": "verification/recorded-runtime-r1/compatibility-checks-output.log",
+      "sha256": "3f44c6861e9be3ec6143e1184da88525e339b728ad767e41f63e5f85640bdf80"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\recorded-runtime-r1\\connection-example-output.log",
+      "path": "verification/recorded-runtime-r1/connection-example-output.log",
+      "sha256": "ed45570900bbd02ee3faad4be32c269862a637f23159d2b9ad980fd642cec3fa"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\recorded-runtime-r1\\protocol-checks-output.log",
+      "path": "verification/recorded-runtime-r1/protocol-checks-output.log",
+      "sha256": "34bd715a6792201a8196aa53a971c7ec1b94ef9e83b5e2f691f22cc867c4155d"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\recorded-runtime-r1\\require-checks-output.log",
+      "path": "verification/recorded-runtime-r1/require-checks-output.log",
+      "sha256": "54bf4b9adb7d7e32eb5d783018c47615d2603971a0f6d551f35b6498a23db6f7"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\recorded-runtime-r1\\spec.json",
+      "path": "verification/recorded-runtime-r1/spec.json",
+      "sha256": "84f75221ddba4b55dc88fc588147386fd37f56e63824999622ceaf7539b61604"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\standards\\rfc5802.txt",
+      "path": "verification/standards/rfc5802.txt",
+      "sha256": "12fcaba0dd78fe7aeb1c63f433314722977ef6746a638fce0f168c63a5bd24ba"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\standards\\rfc5929.txt",
+      "path": "verification/standards/rfc5929.txt",
+      "sha256": "d32604f5d5e2028f09a8e0cf1584b7bb27e75b2e060233cd5387446ac486eab7"
+    },
+    {
+      "source": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\standards\\sources.json",
+      "path": "verification/standards/sources.json",
+      "sha256": "fbbc39c806743ae068e74bd8b05182af5452e08645a258b44a75523392eefd01"
+    }
+  ],
+  "reproduction_readme": "本目录是 asyncpg SCRAM-SHA-256-PLUS 首轮冻结后的独立验收材料。实际Windows/Python 3.14.3，新venv从冻结Cython源码重编译，固定pgproto子模块；依赖、工具链路径、实际导入和命令原件齐备，没有使用原模型环境旧pyd代替构建。按verification/reproduction-notes.md复现。无需外部数据库，TLS和PostgreSQL协议对端只使用本机回环和临时证书。不同测试范围分别保存，不相加：协议14过2失败，非SASL5过1失败，证书6过1失败，池acquire2过；基础SCRAM4过、参数8过3跳过62子测试过、模型新增38过。安全缺口及RFC依据见evidence-map.json。录屏中的重复运行不算新测试成绩，错误签名路径额外SSL回调异常保留在录制日志中。原生轨迹与视频各在飞书专用附件字段，公开目录不复制轨迹或视频。",
+  "no_model_source_edits": true,
+  "native_trace_included": false
+}

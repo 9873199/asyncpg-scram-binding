@@ -1,0 +1,25 @@
+The implementation is complete and fully verified. Here's the summary.
+
+## What was built
+
+SCRAM-SHA-256-PLUS channel binding for asyncpg, binding authentication to the exact TLS channel via the RFC 5929 `tls-server-end-point` channel binding.
+
+### New file
+- **`asyncpg/_channel_binding.py`** (pure Python, shared by the connection layer and the Cython state machine):
+  - `ChannelBindingMode` enum (`disable`/`prefer`/`require`) with validation.
+  - `get_tls_server_end_point()` — hashes the peer leaf cert's DER with its signature hash; **falls back to SHA-256 for MD5/SHA-1-signed certs** (RFC 5929 §4.1), uses SHA-256 for Ed25519, and raises a clear `InterfaceError` for unsupported algorithms or no TLS/cert. Handles both Python 3.14 DER-bytes chains and older `x509.Certificate` chains, plus a `getpeercert(binary_form=True)` fallback.
+  - `get_scram_mechanisms()` — the negotiation matrix. `require` never downgrades (non-TLS / no PLUS / no binding data all raise); `prefer` picks PLUS when bindable and advertised, otherwise negotiates plain SCRAM with the correct GS2 `n,,` downgrade signal.
+
+### Cython authentication layer
+- **`scram.pyx`/`scram.pxd`**: accepts PLUS; the final message's `c=` and the authorization message now carry `GS2 header + raw binding bytes` for PLUS (still just `n,,` for plain SCRAM). Proof and server-signature logic unchanged, so a swapped certificate makes the end-point mismatch and the proof/signature fail. Mechanism validated in `__cinit__`.
+- **`coreproto.pyx`/`coreproto.pxd`**: mechanism choice happens **inside** the SASL exchange using this connection's own transport `ssl_object` (each `CoreProtocol` has its own `scram` state — no cross-connection leakage). `require` also refuses cleartext/MD5 password auth rather than silently degrading.
+
+### Python connection layer
+- **`connect_utils.py`**: new `channel_binding` field in `_ConnectionParameters`; parsed from kwargs, DSN query, `pg_service.conf`, and `PGCHANNELBINDING`; `require` + non-TLS is rejected at config time.
+- **`connection.py`**: `connect(..., channel_binding=None)` with full docs (default `disable`). The pool needs no change — `create_pool(**connect_kwargs)` already forwards it, and a test proves it reaches the wire.
+
+### Tests (no database required)
+- **`tests/test_channel_binding.py`** (38 tests): a local, threaded PostgreSQL protocol peer over real TLS with ephemeral certs and deterministic nonces, plus an independent RFC 5802 reference verifier. Covers negotiation, GS2 headers, `c=` content, proof computation, bad server signature, wrong password, `require` rejecting plain-only/cleartext/MD5/non-TLS, STARTTLS and direct-TLS, DSN and pool plumbing, plain-SCRAM regression, SHA-1/MD5/Ed25519/unknown-alg cert rules, and two concurrent (plus sequential) connections binding **different** certificates.
+- **`tests/test_connect.py`**: parsing/env/DSN/service-file/validation cases.
+
+All 53 cluster-independent tests pass and flake8 is clean. The build uses Cython + MSVC (rebuilt in-place). `cryptography` is imported lazily, so it's only needed at runtime when channel binding is exercised; normal SCRAM needs no new dependency. I did not commit, since you didn't ask me to.

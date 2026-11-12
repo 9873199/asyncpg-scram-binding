@@ -1,0 +1,18 @@
+{
+  "time": "2026-11-13T02:44:07+08:00",
+  "source": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\tasks\\scram-asyncpg\\environment-status.json",
+  "source_sha256": "a7b905bb55d6d50b33ed11b35d1c1469dc552ec10b993ecc3b2c3c2b0554feae",
+  "python": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\tasks\\scram-asyncpg\\env\\Scripts\\python.exe",
+  "task_environment": {
+    "VSCMD_ARG_HOST_ARCH": "x64",
+    "VSCMD_ARG_TGT_ARCH": "x64",
+    "DISTUTILS_USE_SDK": "1",
+    "MSSdk": "1",
+    "VCToolsInstallDir": "D:\\hc\\userFeedback\\cache\\toolchains\\msvc\\VC\\Tools\\MSVC\\14.44.35207\\",
+    "WindowsSDKVersion": "10.0.26100.0\\",
+    "INCLUDE": "D:\\hc\\userFeedback\\cache\\toolchains\\msvc\\VC\\Tools\\MSVC\\14.44.35207\\include;D:\\hc\\userFeedback\\cache\\toolchains\\msvc\\Windows Kits\\10\\Include\\10.0.26100.0\\ucrt;D:\\hc\\userFeedback\\cache\\toolchains\\msvc\\Windows Kits\\10\\Include\\10.0.26100.0\\shared;D:\\hc\\userFeedback\\cache\\toolchains\\msvc\\Windows Kits\\10\\Include\\10.0.26100.0\\um;D:\\hc\\userFeedback\\cache\\toolchains\\msvc\\Windows Kits\\10\\Include\\10.0.26100.0\\winrt",
+    "LIB": "D:\\hc\\userFeedback\\cache\\toolchains\\msvc\\VC\\Tools\\MSVC\\14.44.35207\\lib\\x64;D:\\hc\\userFeedback\\cache\\toolchains\\msvc\\Windows Kits\\10\\Lib\\10.0.26100.0\\ucrt\\x64;D:\\hc\\userFeedback\\cache\\toolchains\\msvc\\Windows Kits\\10\\Lib\\10.0.26100.0\\um\\x64"
+  },
+  "task_path_prepend": "D:\\hc\\userFeedback\\cache\\toolchains\\msvc\\VC\\Tools\\MSVC\\14.44.35207\\bin\\Hostx64\\x64;D:\\hc\\userFeedback\\cache\\toolchains\\msvc\\Windows Kits\\10\\bin\\10.0.26100.0\\x64",
+  "scope": "Actual build paths. On another Windows machine replace the toolchain root with matching MSVC/SDK installation paths."
+}

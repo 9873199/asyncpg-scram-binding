@@ -1,0 +1,26 @@
+{
+  "scopes": {
+    "upstream-scram": "4 passed",
+    "upstream-connect-params": "8 passed, 3 skipped, 62 subtests passed",
+    "frozen-model-channel-tests": "38 passed",
+    "independent-protocol": "2 failed, 14 passed",
+    "independent-nonsasl": "1 failed, 5 passed",
+    "independent-certificates": "1 failed, 6 passed",
+    "independent-pool": "2 passed"
+  },
+  "independent_failed_cases": {
+    "protocol": [
+      "TLS prefer/plain-only GS2 flag",
+      "omitted server final"
+    ],
+    "non_sasl": [
+      "TLS trust with require"
+    ],
+    "certificate": [
+      "hashless certificate unsupported-by-RFC5929 handling"
+    ]
+  },
+  "all_scopes_passed": false,
+  "counts_not_summed": true,
+  "score_not_derived_from_passrate": true
+}

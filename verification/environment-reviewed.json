@@ -1,0 +1,17 @@
+{
+  "time": "2026-11-13T02:36:35+08:00",
+  "uid": 126,
+  "container": false,
+  "external_runtime_services": false,
+  "loopback_network": true,
+  "actual": {
+    "python": "3.14.3 (tags/v3.14.3:323c59a, Feb  3 2026, 16:04:56) [MSC v.1944 64 bit (AMD64)]",
+    "executable": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\env\\Scripts\\python.exe",
+    "module": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\replay-source\\asyncpg\\__init__.py",
+    "compiled_protocol": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\replay-source\\asyncpg\\protocol\\protocol.cp314-win_amd64.pyd"
+  },
+  "frozen_import_verified": true,
+  "compiled_from_frozen_source": true,
+  "submodule_exact": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\submodule-replay-proof.json",
+  "environment": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\dependency-lock.stdout.log"
+}

@@ -1,0 +1,179 @@
+{
+  "time": "2026-11-13T02:34:09+08:00",
+  "source_evidence": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\metadata\\scram-asyncpg\\pgproto-archive\\archive-acquisition-proof.json",
+  "upstream_commit": "a29a6f6aaa09013cb33ffadb8dd57e21d671ab55",
+  "superproject_gitlink": "160000 commit a29a6f6aaa09013cb33ffadb8dd57e21d671ab55\tasyncpg/pgproto",
+  "archive_sha256": "f1cdfa6e2d0e0a8ebc054a13088859660b98b13fac18e645b6e09aa1dcd8778a",
+  "all_source_files_unchanged_during_model_run": true,
+  "files": [
+    {
+      "path": ".gitignore",
+      "sha256": "521455de9f90b102c7bdaf996d6126e493746ce70d65178c79ae252fed1a3a1e"
+    },
+    {
+      "path": "AUTHORS",
+      "sha256": "808618714b96892652f7796cb7042d093e7a4add4db4a83e7e2927f28babc3ae"
+    },
+    {
+      "path": "LICENSE",
+      "sha256": "d9222d73fdac50992174076efa04f44f6fbcd9d56155a7c7092e98757042a6f6"
+    },
+    {
+      "path": "README.rst",
+      "sha256": "5c9ac60ad55e16cb74802c801ca461e9953b10a3facdfd15afe26114aaea8ec1"
+    },
+    {
+      "path": "__init__.pxd",
+      "sha256": "b942242ae23a2069d0e6d657b6b8ce0bfd77aa3a7d3193b07b02a5af1285ccf6"
+    },
+    {
+      "path": "__init__.py",
+      "sha256": "b942242ae23a2069d0e6d657b6b8ce0bfd77aa3a7d3193b07b02a5af1285ccf6"
+    },
+    {
+      "path": "buffer.pxd",
+      "sha256": "77e86a8bcd5954b0f5ea54fe35a71a4174d8282b44f916315899998ac962655f"
+    },
+    {
+      "path": "buffer.pxi",
+      "sha256": "cdd939ace3a87a71e9c30617704a3e37251c2e052fdd0c40e342425daaca56c3"
+    },
+    {
+      "path": "buffer.pyx",
+      "sha256": "99c68d49caf58cf23c929c53f637e0fcd89ccbc24e8d0bfa58cda3e4934fa000"
+    },
+    {
+      "path": "codecs/__init__.pxd",
+      "sha256": "cc7b457439c69fc78348f3933f0f09cc3f30fce089caa2f417ab3d751f15cf66"
+    },
+    {
+      "path": "codecs/bits.pyx",
+      "sha256": "c7830c5512e8b73f51f27f351344b7950424db702f2e53836f6a5efcd198a822"
+    },
+    {
+      "path": "codecs/bytea.pyx",
+      "sha256": "a2dfa8147fa1cd0f3d1145a778793940353197692b2a4a5813f9d69255475d65"
+    },
+    {
+      "path": "codecs/context.pyx",
+      "sha256": "a18bab4e81e7a59cfe43c90fcd1391152fd1c95e071f992c70d2ac6583ede055"
+    },
+    {
+      "path": "codecs/datetime.pyx",
+      "sha256": "c0b70f54ea0f32c23b3fc548b9044eee8caa86bf15448aca32f0ed4aa8d8495a"
+    },
+    {
+      "path": "codecs/float.pyx",
+      "sha256": "03a5d703635d4bcd8410d8400c0df92c89f12dc26c4695ef17a25599effa1c27"
+    },
+    {
+      "path": "codecs/geometry.pyx",
+      "sha256": "0ed4400f0b227dbcc0672002c5a9277b63150297143638bc1323a0b4aba811ac"
+    },
+    {
+      "path": "codecs/hstore.pyx",
+      "sha256": "b17c059f7bb3ca9bcf9182051f41729225bd454f2a4667b6374960f14a01ea48"
+    },
+    {
+      "path": "codecs/int.pyx",
+      "sha256": "e11ba7b5397fe3e23b7a409238d2bdcb809616085499a14695d5cbeabb8b8313"
+    },
+    {
+      "path": "codecs/json.pyx",
+      "sha256": "7eceddd2cae8c8c33d5195be9a61a0bc7b551bb32205a73b2276ffc33d66311b"
+    },
+    {
+      "path": "codecs/jsonpath.pyx",
+      "sha256": "6c05e04ef3f34259097651c707de42365d3727658077f88adc9b04d4f5c8d8a5"
+    },
+    {
+      "path": "codecs/misc.pyx",
+      "sha256": "ba5e471686d0d47dec84ee9386b4a59041ced65bf13a8a939d17a3dd469b2a24"
+    },
+    {
+      "path": "codecs/network.pyx",
+      "sha256": "d6814cfffc53e47de9219acbc91aa336aad1eb3d54365a8c3961931a7b1b3b2c"
+    },
+    {
+      "path": "codecs/numeric.pyx",
+      "sha256": "4c0379b2d157ce6122c8febd3031b5a17af23c0142c999b11dca8f73ebf2ecb3"
+    },
+    {
+      "path": "codecs/pg_snapshot.pyx",
+      "sha256": "58627e76fec95d5b9fc9b022b9272d87b2a55d72d174ca9229bb5f4f89295562"
+    },
+    {
+      "path": "codecs/text.pyx",
+      "sha256": "c87a49091c6b7f63e09b3d5a6d84a0bc540345c80224dd77eda9e2ca03a8fde7"
+    },
+    {
+      "path": "codecs/tid.pyx",
+      "sha256": "ffd2fc0bd3520d5e84864e3c555f3138b0cd2d5273d91f3c128ae765b1dcabcf"
+    },
+    {
+      "path": "codecs/uuid.pyx",
+      "sha256": "5c8c9d40268f5257f3f4cbd50cebbfe414c77759122a6275af7901a6c7e37d81"
+    },
+    {
+      "path": "consts.pxi",
+      "sha256": "7a6ba2e64c37eb68afa361b5e65f1ea55000f26e5e0e571b72b467efde3f91ec"
+    },
+    {
+      "path": "cpythonx.pxd",
+      "sha256": "07d7c07dab1782858df99f924c60b16eed2c5be411f046e50886f19733e8d147"
+    },
+    {
+      "path": "debug.h",
+      "sha256": "7cfb7ff629137acb0b3b46cd576e857cfb148b1dd9e78979088c0f4f5131f133"
+    },
+    {
+      "path": "debug.pxd",
+      "sha256": "4ae2c6dadb5e59eddc5e74b47334534cd9e79b6406806d3689ca7fe86fd7f58c"
+    },
+    {
+      "path": "frb.pxd",
+      "sha256": "076b36770f929337ca59e2c45b354b4e48e36185b9de96b33dc54d1f7bcfc409"
+    },
+    {
+      "path": "frb.pyx",
+      "sha256": "edb8a959205779bc1eab72411650af4b06b4ddf21918b90a3ea59b27c5455852"
+    },
+    {
+      "path": "hton.h",
+      "sha256": "a3ac2518ba74991a9c57a92f28563fad6e0aca038e2b0a3ab714c2d7d505ff16"
+    },
+    {
+      "path": "hton.pxd",
+      "sha256": "4b0c79af2f3689660ef4e9387d16bf6fb70b4ab20fcb13589725e6fa7718c1ea"
+    },
+    {
+      "path": "pgproto.pxd",
+      "sha256": "4145315a21ca74a7c5c5d0d3d1ccd2bce16c0386f9f4c25147a5a551b24580f8"
+    },
+    {
+      "path": "pgproto.pyi",
+      "sha256": "bc3b27a3ddda9eee3808c6b44c64ce7104814fc9915d5fafbce1f4bfe906088d"
+    },
+    {
+      "path": "pgproto.pyx",
+      "sha256": "6caef9a9f4509687f33bc743cc9da61d4134c0b7974ac73948b7801afc9749e1"
+    },
+    {
+      "path": "tohex.h",
+      "sha256": "2f0f0264c87ef1eb1cdcdb94f3c40d9d717e7c871c1b5a2ed74fff8643e23858"
+    },
+    {
+      "path": "tohex.pxd",
+      "sha256": "7d055ac41bba741c363ff44e47c3123d50e555ea7431c2a2ebd7dd4012e189f2"
+    },
+    {
+      "path": "types.py",
+      "sha256": "ece9ead9dee2d353cb8d1d7df5376b699141eba09d80811762e1e84024f78ca5"
+    },
+    {
+      "path": "uuid.pyx",
+      "sha256": "85e52daf42b125248d43dd96cfdc580876eecd2fee307cea989ac4b4a5bfd1c7"
+    }
+  ],
+  "scope": "Exact upstream build dependency restored in separate replay copy. Frozen artifact and model workspace not modified."
+}

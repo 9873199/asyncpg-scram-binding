@@ -1,0 +1,63 @@
+============================= test session starts =============================
+platform win32 -- Python 3.14.3, pytest-9.2.0, pluggy-1.7.0 -- D:\hc\userFeedback\cache\execution-security-new11-20261112\evaluation\uf-20261113-recovery-scram-asyncpg-1\verification\env\Scripts\python.exe
+rootdir: D:\hc\userFeedback\cache\execution-security-new11-20261112
+collecting ... collected 16 items
+
+..\test_scram_boundary.py::test_negotiation_and_exact_proof[disable-True-mechanisms0-SCRAM-SHA-256-n,,] PASSED [  6%]
+..\test_scram_boundary.py::test_negotiation_and_exact_proof[prefer-True-mechanisms1-SCRAM-SHA-256-PLUS-p=tls-server-end-point,,] PASSED [ 12%]
+..\test_scram_boundary.py::test_negotiation_and_exact_proof[require-True-mechanisms2-SCRAM-SHA-256-PLUS-p=tls-server-end-point,,] PASSED [ 18%]
+..\test_scram_boundary.py::test_negotiation_and_exact_proof[prefer-True-mechanisms3-SCRAM-SHA-256-y,,] FAILED [ 25%]
+..\test_scram_boundary.py::test_negotiation_and_exact_proof[prefer-False-mechanisms4-SCRAM-SHA-256-n,,] PASSED [ 31%]
+..\test_scram_boundary.py::test_negotiation_and_exact_proof[disable-False-mechanisms5-SCRAM-SHA-256-n,,] PASSED [ 37%]
+..\test_scram_boundary.py::test_require_rejects_downgrade[False-mechanisms0] PASSED [ 43%]
+..\test_scram_boundary.py::test_require_rejects_downgrade[True-mechanisms1] PASSED [ 50%]
+..\test_scram_boundary.py::test_invalid_server_signature_rejected PASSED [ 56%]
+..\test_scram_boundary.py::test_omitted_server_signature_cannot_complete_authentication FAILED [ 62%]
+..\test_scram_boundary.py::test_missing_binding_data_requires_refusal_and_no_cross_call_cache PASSED [ 68%]
+..\test_scram_boundary.py::test_independent_certificates_concurrent_connections PASSED [ 75%]
+..\test_scram_boundary.py::test_connection_routes_preserve_requirement[True-False] PASSED [ 81%]
+..\test_scram_boundary.py::test_connection_routes_preserve_requirement[False-True] PASSED [ 87%]
+..\test_scram_boundary.py::test_connection_routes_preserve_requirement[True-True] PASSED [ 93%]
+..\test_scram_boundary.py::test_invalid_mode_rejected_before_network PASSED [100%]
+
+================================== FAILURES ===================================
+_ test_negotiation_and_exact_proof[prefer-True-mechanisms3-SCRAM-SHA-256-y,,] _
+..\test_scram_boundary.py:33: in test_negotiation_and_exact_proof
+    asyncio.run(scenario())
+C:\Users\Administrator\AppData\Local\Programs\Python\Python314\Lib\asyncio\runners.py:204: in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+C:\Users\Administrator\AppData\Local\Programs\Python\Python314\Lib\asyncio\runners.py:127: in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\Administrator\AppData\Local\Programs\Python\Python314\Lib\asyncio\base_events.py:719: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+..\test_scram_boundary.py:32: in scenario
+    assert p.sessions[0]['mechanism']==expected and p.sessions[0]['first'].startswith(gs2)
+E   AssertionError: assert (b'SCRAM-SHA-256' == b'SCRAM-SHA-256'
+E     
+E     Full diff: (-: missing in left side, +: extra in left side)
+E       (b'SCRAM-SHA-256') and False)
+E    +  where False = <built-in method startswith of str object at 0x000002431B7D2550>('y,,')
+E    +    where <built-in method startswith of str object at 0x000002431B7D2550> = 'n,,n=local-test-user,r=s9VNNYZEBv1wyRc/Ac9sEmARk6CpgZ4j'.startswith
+________ test_omitted_server_signature_cannot_complete_authentication _________
+..\test_scram_boundary.py:55: in test_omitted_server_signature_cannot_complete_authentication
+    asyncio.run(scenario())
+C:\Users\Administrator\AppData\Local\Programs\Python\Python314\Lib\asyncio\runners.py:204: in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+C:\Users\Administrator\AppData\Local\Programs\Python\Python314\Lib\asyncio\runners.py:127: in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\Administrator\AppData\Local\Programs\Python\Python314\Lib\asyncio\base_events.py:719: in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+..\test_scram_boundary.py:54: in scenario
+    with pytest.raises((asyncpg.InterfaceError,asyncpg.PostgresError,TimeoutError)):await connect(p,'require')
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE any of (InterfaceError, PostgresError, TimeoutError)
+=========================== short test summary info ===========================
+FAILED ..\test_scram_boundary.py::test_negotiation_and_exact_proof[prefer-True-mechanisms3-SCRAM-SHA-256-y,,]
+FAILED ..\test_scram_boundary.py::test_omitted_server_signature_cannot_complete_authentication
+======================== 2 failed, 14 passed in 3.26s =========================

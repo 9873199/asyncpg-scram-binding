@@ -1,0 +1,21 @@
+{
+  "time": "2026-11-13T02:34:47+08:00",
+  "argv": [
+    "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\env\\Scripts\\python.exe",
+    "-B",
+    "-m",
+    "pip",
+    "install",
+    "setuptools==84.2.1",
+    "packaging==26.3",
+    "Cython==3.3.1",
+    "pytest==9.2.0",
+    "cryptography==50.0.2",
+    "trustme==1.2.1",
+    "distro==1.9.0"
+  ],
+  "cwd": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\replay-source",
+  "exit_code": 0,
+  "stdout_log": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\dependencies.stdout.log",
+  "stderr_log": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\dependencies.stderr.log"
+}

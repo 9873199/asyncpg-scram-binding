@@ -1,0 +1,13 @@
+{
+  "time": "2026-11-13T02:35:44+08:00",
+  "argv": [
+    "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\env\\Scripts\\python.exe",
+    "-B",
+    "-c",
+    "import asyncpg,asyncpg.protocol.protocol as p,sys,json;print(json.dumps({\"python\":sys.version,\"executable\":sys.executable,\"module\":asyncpg.__file__,\"compiled_protocol\":p.__file__}))"
+  ],
+  "cwd": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\replay-source",
+  "exit_code": 0,
+  "stdout_log": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\actual-import.stdout.log",
+  "stderr_log": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\actual-import.stderr.log"
+}

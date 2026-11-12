@@ -1,0 +1,80 @@
+{
+  "title": "PostgreSQL TLS connection",
+  "directory": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\recording\\r1",
+  "cwd": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\replay-source",
+  "capture": "wgc",
+  "environment": {
+    "PYTHONPATH": "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\replay-source",
+    "PYTHONDONTWRITEBYTECODE": "1"
+  },
+  "commands": [
+    {
+      "id": "connection-example",
+      "label": "Local TLS authentication",
+      "display": "python scram-demo.py",
+      "argv": [
+        "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\env\\Scripts\\python.exe",
+        "-B",
+        "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\scram-demo.py"
+      ],
+      "start_at_seconds": 0
+    },
+    {
+      "id": "protocol-checks",
+      "label": "Authentication message checks",
+      "display": "python -m pytest test_scram_boundary.py -v",
+      "argv": [
+        "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\env\\Scripts\\python.exe",
+        "-B",
+        "-m",
+        "pytest",
+        "-v",
+        "--tb=short",
+        "-p",
+        "no:cacheprovider",
+        "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\test_scram_boundary.py",
+        "--basetemp",
+        "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\recording\\r1\\tmp-protocol"
+      ],
+      "start_at_seconds": 18
+    },
+    {
+      "id": "require-checks",
+      "label": "Required channel binding",
+      "display": "python -m pytest test_scram_nonsasl.py -v",
+      "argv": [
+        "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\env\\Scripts\\python.exe",
+        "-B",
+        "-m",
+        "pytest",
+        "-v",
+        "--tb=short",
+        "-p",
+        "no:cacheprovider",
+        "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\test_scram_nonsasl.py",
+        "--basetemp",
+        "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\recording\\r1\\tmp-nonsasl"
+      ],
+      "start_at_seconds": 42
+    },
+    {
+      "id": "compatibility-checks",
+      "label": "SCRAM and pool connections",
+      "display": "python -m pytest tests/test_scram.py test_scram_pool.py -q",
+      "argv": [
+        "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\env\\Scripts\\python.exe",
+        "-B",
+        "-m",
+        "pytest",
+        "-q",
+        "-p",
+        "no:cacheprovider",
+        "tests/test_scram.py",
+        "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\verification\\test_scram_pool.py",
+        "--basetemp",
+        "D:\\hc\\userFeedback\\cache\\execution-security-new11-20261112\\evaluation\\uf-20261113-recovery-scram-asyncpg-1\\recording\\r1\\tmp-compatibility"
+      ],
+      "start_at_seconds": 57
+    }
+  ]
+}

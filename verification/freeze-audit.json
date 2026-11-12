@@ -1,0 +1,29 @@
+{
+  "time": "2026-11-13T02:34:01+08:00",
+  "uid": 126,
+  "status": "PASS",
+  "single_native_trace": "D:\\hc\\userFeedback\\cache\\runs\\uf-20261113-recovery-scram-asyncpg-1\\frozen\\trajectory-original.jsonl",
+  "trace_sha256": "91fbd5f31128308a4c91dd3042520334ed3ae069c47fa4ed11ea7f7f7fa3174d",
+  "session_id": "67418362-716a-488b-a03a-e7ca64f416f1",
+  "prompt_id": "bd9a6944-ce56-47bd-bf19-1566768c83a5",
+  "exact_single_prompt": true,
+  "native_models": [
+    "auto_model/urm"
+  ],
+  "native_efforts": [
+    "high"
+  ],
+  "three_explicit_high_settings": true,
+  "native_success": true,
+  "frozen_files_unchanged": true,
+  "private_reasoning_excluded": true,
+  "event_counts": {
+    "queue-operation": 6,
+    "user": 256,
+    "attachment": 244,
+    "atis-latch": 64,
+    "assistant": 611,
+    "last-prompt": 64,
+    "system": 1
+  }
+}

@@ -1,0 +1,49 @@
+Local PostgreSQL authentication
+
+TLS connection, channel_binding=disable
+Connected with: SCRAM-SHA-256
+
+TLS connection, channel_binding=prefer
+Connected with: SCRAM-SHA-256-PLUS
+
+TLS connection, channel_binding=require
+Connected with: SCRAM-SHA-256-PLUS
+
+Server signature check
+TLS connection, channel_binding=require
+Fatal error on SSL protocol
+protocol: <asyncio.sslproto.SSLProtocol object at 0x000001E54E7BC980>
+transport: <_ProactorSocketTransport closing fd=968>
+Traceback (most recent call last):
+  File "asyncpg/protocol/coreproto.pyx", line 139, in asyncpg.protocol.protocol.CoreProtocol._read_server_messages
+    self._push_result()
+  File "asyncpg/protocol/coreproto.pyx", line 874, in asyncpg.protocol.protocol.CoreProtocol._push_result
+    self._on_result()
+  File "asyncpg/protocol/protocol.pyx", line 940, in asyncpg.protocol.protocol.BaseProtocol._on_result
+    self._dispatch_result()
+  File "asyncpg/protocol/protocol.pyx", line 862, in asyncpg.protocol.protocol.BaseProtocol._dispatch_result
+    if waiter.cancelled():
+AttributeError: 'NoneType' object has no attribute 'cancelled'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python314\Lib\asyncio\sslproto.py", line 740, in _do_read
+    self._do_read__copied()
+    ~~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python314\Lib\asyncio\sslproto.py", line 802, in _do_read__copied
+    self._app_protocol.data_received(b''.join(data))
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+  File "asyncpg/protocol/protocol.pyx", line 989, in asyncpg.protocol.protocol.BaseProtocol.data_received
+    self._read_server_messages()
+  File "asyncpg/protocol/coreproto.pyx", line 160, in asyncpg.protocol.protocol.CoreProtocol._read_server_messages
+    self._push_result()
+  File "asyncpg/protocol/coreproto.pyx", line 874, in asyncpg.protocol.protocol.CoreProtocol._push_result
+    self._on_result()
+  File "asyncpg/protocol/protocol.pyx", line 940, in asyncpg.protocol.protocol.BaseProtocol._on_result
+    self._dispatch_result()
+  File "asyncpg/protocol/protocol.pyx", line 862, in asyncpg.protocol.protocol.BaseProtocol._dispatch_result
+    if waiter.cancelled():
+AttributeError: 'NoneType' object has no attribute 'cancelled'
+Connection ended: InterfaceError could not verify server signature for SCRAM authentication: scram-sha-256
+
